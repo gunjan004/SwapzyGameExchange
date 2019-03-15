@@ -1,0 +1,36 @@
+<nav id="menu">
+    <ul>
+        <% if(sessionData === undefined) { %>
+            <li class="menu-item"><a href="/signIn">Sign In</a></li>
+        <% } else { %>
+            <% if(userData === "Invalid or No User/password provided" || defaultUsr === "default") { %>
+                <li class="menu-item"><a href="/signIn">Sign In</a></li>
+            <% } else { %>
+                <li class="menu-item"><a href="/signOut">Sign Out</a></li>
+            <% } %>
+        <% } %>
+
+        <li class="menu-item"><a href="/myItems">My Games</a></li>
+        <li class="menu-item"><a href="/mySwaps">My Swaps</a></li>
+        <li class="menu-item"><a href="#">Cart</a></li>
+
+        <% if(sessionData === undefined) { %>
+            <li class="menu-item"><a href="/register">Register</a></li>
+        <% } else { %>
+            <% if(userData === "Invalid or No User/password provided" || defaultUsr === "default") { %>
+                <li class="menu-item"><a href="/register">Register</a></li>
+            <% } %>
+        <% } %>
+
+    </ul>
+
+    <% if(sessionData === undefined) { %>
+        <label class="sign">Not Signed In</label>
+    <% } else { %>
+        <% if(userData === "Invalid or No User/password provided" || defaultUsr === "default") { %>
+            <label class="sign">Not Signed In</label>
+        <% } else { %>
+            <label class="sign">Welcome <%= userData %>!</label>
+        <% } %>
+    <% } %>
+</nav>

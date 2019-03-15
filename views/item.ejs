@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Swapzy: Online Game Exchange</title>
+	<link rel="stylesheet" href="/resources/style.css" type="text/css" />
+	<link rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="shortcut icon" href="/resources/myIcon.ico" />
+</head>
+
+<body>
+<div id="container">
+
+	<!-- Partials -->
+	<!-- Header -->
+	<% include partials/header.ejs %>
+
+	<!-- Main Menu -->
+	<% include partials/user-navigation.ejs %>
+
+	<!-- Left Menu -->
+	<% include partials/site-navigation.ejs %>
+
+	<!--content-->
+	<main>
+
+		<section>
+			<article id= 'articlePad'>
+				<a href="/index">Home</a> > <a href="/categories">Categories</a> > <a href="/item/?itemCode=<%=data.itemCode%>">Item</a>
+				<br/>
+
+				<div class="div_about">
+					<img src="/resources/swaps2.gif" alt="swaps" />
+					<div class="div-block">Game Info</div>
+				</div>
+
+				<br />
+
+				<div class="section_item">
+					<img src="<%= data.imageUrl %>" alt="<%= data.itemName %>" />
+					<h2><%= data.itemName %></h2>
+					<% if (status != undefined) {
+					if(status === 'Available' || status === 'Pending'){ %>
+						<i class="fa fa-recycle"> &nbsp; Swap Offer Available</i><br>
+						<a href="/mySwaps" class="addOrRemoveFromCart">See the Offer</a><br>
+					<% } else if(status === 'Swapped') {%> <img src="/resources/myLogo.png" alt="swapzy logo"/><p>You've swapped this item.</p> <% } }%>
+
+					<a href="/swaps/?itemCode=<%=data.itemCode%>" class="addOrRemoveFromCart"><i class="fa fa-exchange"> &nbsp; Swap</i></a>
+					<!-- <button id="swapBtn" class="button"><i class="fa fa-exchange"> &nbsp Swap</i></button> -->
+					<button id="rateBtn" class="button"><i class="fa fa-star"> &nbsp; Rate</i></button>
+					<a href="/categories" class="addOrRemoveFromCart"><i class="fa fa-backward"> &nbsp; Back to Categories</i></a>
+					<h2>Overview</h2>
+					<p><%= data.description %></p>
+				</div>
+			</article>
+		</section>
+	</main>
+
+	<div id="clearDiv"></div>
+
+	<!-- Footer -->
+	<% include partials/footer.ejs %>
+
+</div>
+</body>
+</html>

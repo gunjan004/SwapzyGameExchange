@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Swapzy: Online Game Exchange</title>
+	<link rel="stylesheet" href="/resources/style.css" type="text/css" />
+	<link rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="shortcut icon" href="/resources/myIcon.ico" />
+</head>
+
+<body>
+<div id="container">
+
+	<!-- Partials -->
+	<!-- Header -->
+	<% include partials/header.ejs %>
+
+	<!-- Main Menu -->
+	<% include partials/user-navigation.ejs %>
+
+	<!-- Left Menu -->
+	<% include partials/site-navigation.ejs %>
+
+	<!--content-->
+	<main>
+
+		<section>
+			<article id="articlePad">
+				<a href="/index">Home</a> > <a href="/myItems">My Games</a>
+				<br/>
+				<div class="div_about">
+					<img src="/resources/games_play.png" alt="gamesplay" />
+					<% if(userData === "Invalid or No User/password provided" || defaultUsr === "default") {%>
+						<div class="div-block">User's Games for swap</div>
+					<% } else { %>
+						<div class="div-block"><%= userData %>'s Games for swap</div>
+					<% } %>
+				</div>
+
+				<br />
+
+				<div>
+
+					<table id="itemsPageTbl">
+
+						<tr>
+							<th>Game</th>
+							<th>Category</th>
+							<th>My Rating</th>
+							<th>Swapped</th>
+						</tr>
+
+						<% if(myItemsList === undefined ||myItemsList.length === 0) { %><tr><td>No items to display</td></tr><% } else { %>
+							<% for(let i=0; i < myItemsList.length; i++) {%>
+								<tr>
+									<td><%= myItemsList[i].item %></td>
+									<td><%= myItemsList[i].category %></td>
+
+									<td>
+										<% for(let j=0; j < myItemsList[i].rating; j++) { %>
+											<span class="fa fa-star checked"></span>
+										<% } %>
+										<% for(let k=0; k < 5 - myItemsList[i].rating; k++) { %>
+											<span class="fa fa-star "></span>
+										<% } %>
+									</td>
+
+									<td>
+										<!-- <button id="updtBtn" class="button">Update</button>
+                                        <button id="deleteBtn" class="button">Delete</button> -->
+										<% if(myItemsList[i].status === "Available") {%>
+											&nbsp; <i class="fa fa-exchange"> &nbsp; &nbsp; </i>
+										<% } else if(myItemsList[i].status === "Swapped") {%>
+											&nbsp; <i class="fa fa-check-circle"> &nbsp; &nbsp; </i>
+										<% } else {%>
+											&nbsp; <i class="fa fa-hourglass-half"> &nbsp; &nbsp; </i>
+										<% } %>
+
+										<a href="/item?action=update&itemName=<%= myItemsList[i].item %>&itemStatus=<%= myItemsList[i].status %>" class="addOrRemoveFromCart">Update</a>
+										<a href="/myItems?action=delete&itemName=<%= myItemsList[i].item %>&itemStatus=<%= myItemsList[i].status %>" class="addOrRemoveFromCart">Delete</a>
+										<% if(myItemsList[i].status === "Swapped") {%>
+											<a href="/feedback?action=feedback&itemName=<%= myItemsList[i].item %>" class="addOrRemoveFromCart">Feedback</a>
+										<% } %>
+									</td>
+								</tr>
+							<% } %>
+						<% } %>
+					</table>
+				</div>
+				<div id="addToCart">
+					<!--<button id="addToCartBtn" class="button">Add to cart</button>-->
+					<% if(userData === "Invalid or No User/password provided" || defaultUsr === "default") {%><% } else { %>
+						<a href="/addNewItem" class="addOrRemoveFromCart">Add New Item</a>
+					<% } %>
+				</div>
+
+
+				<div id="legend"><label>Legend: &nbsp;
+						<i class="fa fa-exchange"> &nbsp; : &nbsp; Available for swap </i> &nbsp;
+						<i class="fa fa-check-circle"> &nbsp; : &nbsp; Already swapped</i>  &nbsp;
+						<i class="fa fa-hourglass-half"> &nbsp; : &nbsp; Pending</i></label></div>
+			</article>
+		</section>
+	</main>
+
+	<div id="clearDiv"></div>
+
+	<!-- Footer -->
+	<% include partials/footer.ejs %>
+
+</div>
+</body>
+</html>

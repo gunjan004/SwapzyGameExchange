@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Swapzy: Online Game Exchange</title>
+    <link rel="stylesheet" href="/resources/style.css" type="text/css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="/resources/myIcon.ico" />
+</head>
+
+<body>
+<div id="container">
+
+    <!-- Partials -->
+    <!-- Header -->
+    <% include partials/header.ejs %>
+
+    <!-- Main Menu -->
+    <% include partials/user-navigation.ejs %>
+
+    <!-- Left Menu -->
+    <% include partials/site-navigation.ejs %>
+
+    <!--content-->
+    <main>
+
+        <section>
+            <article id='articlePad'>
+                <a href="/index">Home</a> > <a href="/register">Register</a>
+
+                <div class="div_about">
+                    <img src="/resources/contactus.png" alt="contact" />
+                    <div class="div-block">Register with Swapzy</div>
+                </div>
+
+                <br />
+                <div>
+
+                    <form id="registrationForm" action="/register" method="POST">
+                        <p>
+                            <label>First Name: </label> <input type="text" name="firstName"
+                                                               placeholder="First Name*" value="<%= usr.firstName %>">
+                        </p>
+                        <h5 class="textError"><%= usr.firstNameError %></h5>
+
+                        <p>
+                            <label>Last Name: </label> <input type="text" name="lastName"
+                                                              placeholder="Last Name*" value="<%= usr.lastName %>">
+                        </p>
+                        <h5 class="textError"><%= usr.lastNameError %></h5>
+
+                        <p>
+                            <label>E-mail: </label> <input type="text" name="emailAddress"
+                                                           placeholder="E-mail ID*" value="<%= usr.emailAddress %>">
+                        </p>
+                        <h5 class="textError"><%= usr.emailError %></h5>
+
+                        <p>
+                            <label>Set Password: </label> <input type="password" name="password"
+                                                                 placeholder="Password*" >
+                        </p>
+                        <h5 class="textError"><%= usr.passwordError %></h5>
+
+                        <p>
+                            <label>Address Field 1: </label> <input type="text" name="address1Field"
+                                                                    placeholder="Address Field 1" value="<%= usr.address1Field %>">
+                        </p>
+
+                        <p>
+                            <label>Address Field 2: </label> <input type="text" name="address2Field"
+                                                                    placeholder="Address Field 2" value="<%= usr.address2Field %>">
+                        </p>
+
+                        <p>
+                            <label>City: </label> <input type="text" name="city"
+                                                         placeholder="City" value="<%= usr.city %>">
+                        </p>
+
+                        <p>
+                            <label>State: </label> <input type="text" name="state"
+                                                          placeholder="State" value="<%= usr.state %>">
+                        </p>
+
+                        <p>
+                            <label>Postal Code: </label> <input type="text" name="postCode"
+                                                                placeholder="Postal Code" value="<%= usr.postCode %>">
+                        </p>
+
+                        <p>
+                            <label>Country: </label> <input type="text" name="country"
+                                                            placeholder="Country" value="<%= usr.country %>">
+                        </p>
+
+                        <div id="addToCart">
+                            <button id="registerId" class="button">Register</button>
+                        </div>
+
+                    </form>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <div id="clearDiv"></div>
+
+    <!-- Footer -->
+    <% include partials/footer.ejs %>
+
+</div>
+</body>
+</html>

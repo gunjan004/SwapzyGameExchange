@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Swapzy: Online Game Exchange</title>
+    <link rel="stylesheet" href="/resources/style.css" type="text/css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="/resources/myIcon.ico" />
+</head>
+
+<body>
+<div id="container">
+
+    <!-- Partials -->
+    <!-- Header -->
+    <% include partials/header.ejs %>
+
+    <!-- Main Menu -->
+    <% include partials/user-navigation.ejs %>
+
+    <!-- Left Menu -->
+    <% include partials/site-navigation.ejs %>
+
+    <!--content-->
+    <main>
+
+        <section>
+            <article id='articlePad'>
+                <a href="/index">Home</a> > <a href="/addNewItem">Add New Item</a>
+
+                <div class="div_about">
+                    <img src="/resources/contactus.png" alt="contact" />
+                    <div class="div-block">Add New Item</div>
+                </div>
+
+                <br />
+                <div>
+
+                    <form id="addNewItemForm" action="/addNewItem" method="POST">
+                        <p>
+                            <label>Item Code: </label> <input type="text" name="itemCode"
+                                                              placeholder="Item Code*" value="<%= usr.itemCode %>">
+                        </p>
+                        <h5 class="textError"><%= usr.itemCodeError %></h5>
+
+                        <p>
+                            <label>Item Name: </label> <input type="text" name="itemName"
+                                                              placeholder="Item Name*" value="<%= usr.itemName %>">
+                        </p>
+                        <h5 class="textError"><%= usr.itemNameError %></h5>
+
+                        <p>
+                            <label>Catalog Category: </label> <input type="text" name="catalogCategory"
+                                                                     placeholder="Catalog Category*" value="<%= usr.catalogCategory %>">
+                        </p>
+                        <h5 class="textError"><%= usr.catalogCategoryError %></h5>
+
+                        <p>
+                            <label>Description: </label> <input type="text" name="description"
+                                                                placeholder="Description" value="<%= usr.description %>">
+                        </p>
+
+                        <p>
+                            <label>Rating: </label> <input type="text" name="rating"
+                                                           placeholder="Rating" value="<%= usr.rating %>">
+                        </p>
+
+                        <p>
+                            <label>Image URL </label> <input type="text" name="imageUrl"
+                                                             placeholder="Image URL" value="<%= usr.imageUrl %>">
+                        </p>
+
+                        <div id="addToCart">
+                            <button id="addItemId" class="button">Add Item</button>
+                        </div>
+
+                        <% if (usr === 'Item added successfully.') { %><div><h2><%= usr %></h2></div><% } %>
+
+                    </form>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <div id="clearDiv"></div>
+
+    <!-- Footer -->
+    <% include partials/footer.ejs %>
+
+</div>
+</body>
+</html>

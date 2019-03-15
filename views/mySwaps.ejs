@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Swapzy: Online Game Exchange</title>
+	<link rel="stylesheet" href="/resources/style.css" type="text/css" />
+	<link rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="shortcut icon" href="/resources/myIcon.ico" />
+</head>
+
+<body>
+<div id="container">
+
+	<!-- Partials -->
+	<!-- Header -->
+	<% include partials/header.ejs %>
+
+	<!-- Main Menu -->
+	<% include partials/user-navigation.ejs %>
+
+	<!-- Left Menu -->
+	<% include partials/site-navigation.ejs %>
+
+	<!--content-->
+	<main>
+
+		<section>
+			<article id= 'articlePad'>
+				<a href="/index">Home</a> > <a href="/mySwaps">My Swaps</a>
+				<br/>
+				<div class="div_about">
+					<img src="/resources/mySwaps.gif" alt="mySwaps" />
+					<% if(userData === "Invalid or No User/password provided" || defaultUsr === "default") {%>
+						<div class="div-block">User's swap offers</div>
+					<% } else { %>
+						<div class="div-block"><%= userData %>'s swap offers</div>
+					<% } %>
+				</div>
+
+				<br />
+
+				<div>
+					<table id="mySwapsTable">
+
+						<tr>
+							<th>Game</th>
+							<th>Swap Offer</th>
+							<th></th>
+						</tr>
+
+						<% if(myUserItemList === undefined || myUserItemList.length === 0) { %><tr><td>No items to display</td></tr><% } else { %>
+							<% for(let i=0; i < myUserItemList.length; i++) { %>
+								<% if(myUserItemList[i].swapItem != "") { %>
+									<tr>
+										<td><%= myUserItemList[i].item %></td>
+										<td><%= myUserItemList[i].swapItem %></td>
+
+										<td>
+											<a href="/mySwaps?click=accept&swapStatus=<%=myUserItemList[i].status%>&item=<%=myUserItemList[i].item%>" class="addOrRemoveFromCart">Accept</a>
+											<a href="/mySwaps?click=reject&swapStatus=<%=myUserItemList[i].status%>&item=<%=myUserItemList[i].item%>" class="addOrRemoveFromCart">Reject</a>
+											<a href="/mySwaps?click=withdraw&swapStatus=<%=myUserItemList[i].status%>&item=<%=myUserItemList[i].item%>" class="addOrRemoveFromCart">Withdraw Swap</a>
+
+										</td>
+									</tr>
+								<% } %>
+							<% } %>
+						<% } %>
+					</table>
+					<table><tr> <td><% if(updateStat != '' || updateStat != undefined) { %><%= updateStat %> <% } %></td></tr></table>
+
+				</div>
+
+			</article>
+		</section>
+	</main>
+
+	<div id="clearDiv"></div>
+
+	<!-- Footer -->
+	<% include partials/footer.ejs %>
+
+</div>
+</body>
+</html>

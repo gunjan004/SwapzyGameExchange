@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Swapzy: Online Game Exchange</title>
+	<link rel="stylesheet" href="/resources/style.css" type="text/css" />
+	<link rel="stylesheet"	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="shortcut icon" href="/resources/myIcon.ico" />
+</head>
+
+<body>
+<div id="container">
+
+	<!-- Partials -->
+	<!-- Header -->
+	<% include partials/header.ejs %>
+
+	<!-- Main Menu -->
+	<% include partials/user-navigation.ejs %>
+
+	<!-- Left Menu -->
+	<% include partials/site-navigation.ejs %>
+
+	<!--content-->
+	<main>
+		<section class="section_category">
+			<article id="articlePad">
+				<a href="/index">Home</a> > <a href="/categories">Categories</a>
+
+				<div class="div_about">
+					<img src="/resources/explore.png" alt="explore" />
+					<div class="div-block">Explore Swapzy</div>
+				</div>
+
+				<br />
+
+				<div>
+					<table id="myCatTable">
+						<% for(let prop in catItems) {%>
+						<tr><th>
+								<a href="/categories/?catalogCategory=<%=prop%>">
+									<%= prop %></a>
+							</th>
+						</tr>
+						<tr>
+							<td>
+								<div class="card">
+									<% if(prop === "Action and Adventure") {%>
+										<img src="/resources/action.jpg" alt="action">
+									<% } else if(prop === "Racing") {%>
+										<img src="/resources/race.jpg" alt="race">
+									<% } else if(prop === "Sports") {%>
+										<img src="/resources/sports.jpeg" alt="sports">
+									<% } else {%>
+										<img src="/resources/fps.jpeg" alt="fps">
+									<% } %>
+									<div class="overlay">
+										<% for(let i=0; i < catItems[prop].length; i++) {%>
+										<div class="subCat">
+											<a href="/item/?itemCode=<%=catItems[prop][i].itemCode%>"><%= catItems[prop][i].itemName%></a>
+										</div>
+										<% } %>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<% } %>
+					</table>
+				</div>
+			</article>
+		</section>
+	</main>
+
+	<div id="clearDiv"></div>
+
+	<!-- Footer -->
+	<% include partials/footer.ejs %>
+
+</div>
+</body>
+</html>

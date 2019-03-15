@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Swapzy: Online Game Exchange</title>
+	<link rel="stylesheet" href="/resources/style.css" type="text/css" />
+	<link rel="stylesheet"
+		  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="shortcut icon" href="/resources/myIcon.ico" />
+</head>
+
+<body>
+<div id="container">
+
+	<!-- Partials -->
+	<!-- Header -->
+	<% include partials/header.ejs %>
+
+	<!-- Main Menu -->
+	<% include partials/user-navigation.ejs %>
+
+	<!-- Left Menu -->
+	<% include partials/site-navigation.ejs %>
+
+	<!--content-->
+	<main>
+
+		<section>
+			<article id='articlePad'>
+				<a href="/index">Home</a> >
+
+				<% if(sessionData === undefined) { %>
+					<a href="/signIn">Sign In</a>
+				<% } else { %>
+					<% if(userData === "Invalid or No User/password provided" || defaultUsr === "default") { %>
+						<a href="/signIn">Sign In</a>
+					<% } else { %>
+						<a href="/signIn">Sign Out</a>
+					<% } %>
+				<% } %>
+
+				<div class="div_about">
+					<img src="/resources/signin.png" alt="signin" />
+					<% if(sessionData === undefined) { %>
+						<div class="div-block">Sign In</div>
+					<% } else { %>
+						<% if(userData === "Invalid or No User/password provided" || defaultUsr === "default") { %>
+							<div class="div-block">Sign In</div>
+						<% } else { %>
+							<div class="div-block">Sign Out</div>
+						<% } %>
+					<% } %>
+				</div>
+
+				<br />
+				<% if(sessionData === undefined) {%>
+					<div id="userFormDiv">
+						<form id="user-form" action="/signIn" method="POST">
+							<!--<form id="user-form"> -->
+							<p>
+								<label>User ID: </label> <input type="text" name="userId">
+							</p>
+
+							<p>
+								<label>Password: </label> <input type="password" name="password">
+							</p>
+
+							<div id="addToCart">
+								<button id="signIn" class="button">Sign In</button>
+							</div>
+						</form>
+					</div>
+				<% } else { %>
+
+					<% if(userData === "Invalid or No User/password provided" || defaultUsr === "default") {%>
+						<div id="userFormDiv">
+							<form id="user-form" action="/signIn" method="POST">
+								<!--<form id="user-form"> -->
+								<p>
+									<label>User ID: </label> <input type="text" name="userId">
+								</p>
+								<h5 class="textError"><%= usr.userIdError %></h5>
+
+								<p>
+									<label>Password: </label> <input type="password" name="password">
+								</p>
+								<h5 class="textError"><%= usr.passwordError %></h5>
+
+								<div id="addToCart">
+									<button id="signIn" class="button">Sign In</button>
+								</div>
+							</form>
+						</div>
+					<% } %>
+
+					<div><h2><% if(userData != undefined && defaultUsr != "default"){
+							if(userData != "Invalid or No User/password provided") { %> Welcome <% } %>
+							<%= userData %>!</h2></div>
+				<% }} %>
+
+				<% if (usr === 'User registered successfully. Please sign In.') { %><div><h2><%= usr %></h2></div><% } %>
+			</article>
+		</section>
+		<!--content1 ends--> </main>
+
+	<div id="clearDiv"></div>
+
+	<!-- Footer -->
+	<% include partials/footer.ejs %>
+
+</div>
+</body>
+</html>

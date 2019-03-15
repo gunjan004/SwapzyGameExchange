@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Swapzy: Online Game Exchange</title>
+	<link rel="stylesheet" href="/resources/style.css" type="text/css" />
+	<link rel="stylesheet"
+		  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="shortcut icon" href="/resources/myIcon.ico" />
+</head>
+
+<body>
+<div id="container">
+
+	<!-- Partials -->
+	<!-- Header -->
+	<% include partials/header.ejs %>
+
+	<!-- Main Menu -->
+	<% include partials/user-navigation.ejs %>
+
+	<!-- Left Menu -->
+	<% include partials/site-navigation.ejs %>
+
+	<!--content-->
+	<main>
+
+		<section>
+			<article id='articlePad'>
+				<a href="/index">Home</a> > <a href="/contact">Contact Us</a>
+
+				<div class="div_about">
+					<img src="/resources/contactus.png" alt="contact" />
+					<div class="div-block">Contact Swapzy</div>
+				</div>
+
+				<br />
+				<div>
+					<div id="contactInfo">
+						Swapzy Headquarters<br /> 123 Swap Street <br /> UTD 7402 <br />
+						San Francisco, CA 27990 <br />
+						<br /> support@swapzy.com
+					</div>
+
+					<form id="contactUsForm">
+						<p>
+							<label>First Name: </label> <input type="text" name="fname"
+															   placeholder="First Name*">
+						</p>
+
+						<p>
+							<label>Last Name: </label> <input type="text" name="lname"
+															  placeholder="Last Name*">
+						</p>
+
+						<p>
+							<label>E-mail: </label> <input type="text" name="email"
+														   placeholder="E-mail ID*">
+						</p>
+
+						<p>
+							<label>How can we help? </label> <input type="text" name="help"
+																	placeholder="How can we help?*">
+						</p>
+
+					</form>
+				</div>
+
+				<div id="addToCart">
+					<button id="helpSubmitBtn" type="submit" class="button">Submit</button>
+				</div>
+			</article>
+		</section>
+	</main>
+
+	<div id="clearDiv"></div>
+
+	<!-- Footer -->
+	<% include partials/footer.ejs %>
+
+</div>
+</body>
+</html>

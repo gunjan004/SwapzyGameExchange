@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Swapzy: Online Game Exchange</title>
+    <link rel="stylesheet" href="/resources/style.css" type="text/css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="/resources/myIcon.ico" />
+</head>
+
+<body>
+<div id="container">
+
+    <!-- Partials -->
+    <!-- Header -->
+    <% include partials/header.ejs %>
+
+    <!-- Main Menu -->
+    <% include partials/user-navigation.ejs %>
+
+    <!-- Left Menu -->
+    <% include partials/site-navigation.ejs %>
+
+    <!--content-->
+    <main>
+
+        <section>
+            <article id='articlePad'>
+                <a href="/index">Home</a> > <a href="#">Feedback</a>
+
+                <div class="div_about">
+                    <img src="/resources/whoarewe2.png" alt="who" />
+                    <div class="div-block">Feedback</div>
+                </div>
+
+                <br />
+                <div>
+
+                    <form id="feedBackForm" action="/feedBack" method="POST">
+                        <% if(userItems === undefined) { %>
+                            <p>No items available for feedback.</p>
+                        <% } else { %>
+                            <table id="feedBackTable">
+                                <tr>
+                                    <th>Game</th>
+                                    <th>Status</th>
+                                    <th>Item Rating</th>
+                                    <th>Swap Item</th>
+                                    <th>Swap Item Rating</th>
+                                    <th>Swapper Rating</th>
+                                </tr>
+                                <% for(var i = 0; i < userItems.length; i++) { %>
+                                    <tr>
+                                        <td>
+                                            <%= userItems[i].item %>
+                                            <input type="hidden" name="item" value="<%= userItems[i].item %>">
+                                        </td>
+                                        <td>
+                                            <%= userItems[i].status %>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="itemRating" value="<%= usr.itemRating %>">
+                                            <h5 class="textError"><%= usr.itemRatingError %></h5>
+
+                                        </td>
+                                        <td>
+                                            <%= userItems[i].swapItem %>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="swapItemRating" value="<%= usr.swapItemRating %>">
+                                            <h5 class="textError"><%= usr.swapItemRatingError %></h5>
+                                        </td>
+                                        <td>
+                                            <input type="text" name="swapperRating"  value="<%= usr.swapperRating %>">
+                                            <h5 class="textError"><%= usr.swapperRatingError %></h5>
+                                        </td>
+                                    </tr>
+                                <% } %>
+                            </table>
+                        <% } %>
+
+                        <% if(userItems != undefined) { %>
+                            <div id="addToCart">
+                                <button id="feedBackId" class="button">Submit Feedback</button>
+                            </div>
+                        <% } %>
+
+                        <% if (usr === 'Feedback Sent!') { %><div><h2><%= usr %></h2></div><% } %>
+
+                    </form>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <div id="clearDiv"></div>
+
+    <!-- Footer -->
+    <% include partials/footer.ejs %>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Swapzy: Online Game Exchange</title>
+    <link rel="stylesheet" href="/resources/style.css" type="text/css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="/resources/myIcon.ico" />
+</head>
+
+<body>
+<div id="container">
+
+    <!-- Partials -->
+    <!-- Header -->
+    <% include partials/header.ejs %>
+
+    <!-- Main Menu -->
+    <% include partials/user-navigation.ejs %>
+
+    <!-- Left Menu -->
+    <% include partials/site-navigation.ejs %>
+
+    <!--content-->
+    <main>
+
+        <section>
+            <article id="articlePad">
+                <a href="/index">Home</a> > <a href="/categories">Categories</a> > <a
+                        href="/item/?itemCode=<%=data.itemCode%>">Item</a> > <a href="/swaps/?itemCode=<%=data.itemCode%>">Swap Game</a>
+
+                <div class="div_about">
+                    <img src="/resources/swaps2.gif" alt="swaps" />
+                    <div class="div-block">Swap Game</div>
+                </div>
+
+                <br />
+
+                <div class="section_item">
+                    <form id="swapsForm" method="POST" action="/confirmSwap">
+                        <img src="<%= data.imageUrl %>" alt="<%= data.itemName %>" />
+                        <h2><%= data.itemName %></h2>
+                        <p><%= data.description %></p>
+                        <input type="hidden" name="myData" value="<%=data.itemName%>">
+
+                        <br />
+
+                        <table id="radioTable">
+                            <% if(availableItem === undefined || availableItem.length == 0) { %> <tr><td>Sorry,
+                                    you do not have any available items for swapping. Please add
+                                    more items to start swapping again!</td></tr> <% } else { %>
+
+                                <p>Select an item from your available swaps:</p>
+                                <% for(var i = 0; i < availableItem.length; i++) { %>
+
+                                <tr>
+                                    <td>
+                                        <div class="inputGroup">
+                                            <input id="radio<%=i%>" name="radioItem" type="radio" value="<%= availableItem[i].item %>" /> <label
+                                                    for="radio<%=i%>"> <%= availableItem[i].item %></label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <% } %>
+                            <% } %>
+
+                        </table>
+
+                        <div class="confirmSwapDiv">
+                            <!--<div id="addToCart">-->
+                            <% if(availableItem === undefined || availableItem.length == 0) { %>
+                                <% if(sessionData === undefined ) { %><h4>Please sign In to see available offers!</h4><% } %>
+                            <% } else { %>
+                                <button id="confirm" class="button"><i class="fa fa-exchange">  &nbsp; Confirm Swap</i></button>
+                            <% } %>%>
+                            <!--</div>-->
+                            <!--<a href="/confirmSwap" class="addOrRemoveFromCart"><i class="fa fa-exchange"> &nbsp; Confirm Swap</i></a>-->
+                            <a href="/categories" class="addOrRemoveFromCart"><i class="fa fa-backward"> &nbsp; Back to Categories</i></a>
+                        </div>
+                    </form>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <div id="clearDiv"></div>
+
+    <!-- Footer -->
+    <% include partials/footer.ejs %>
+
+</div>
+</body>
+</html>
